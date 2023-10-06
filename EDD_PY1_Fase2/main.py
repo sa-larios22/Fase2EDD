@@ -13,14 +13,14 @@ def verificar_login():
 
     if usuario == "202111849" and contrasena == "admin" or usuario == "1" and contrasena == "1":
         ventana_login.destroy() 
-        menu_principal()  
+        admin_menu()  
     elif tablaGlobal.buscar(usuario, contrasena):
         ventana_login.destroy()  
         admin_menu_empleados()  
     else:
         messagebox.showerror("Error de inicio de sesión", "Credenciales incorrectas")
 
-def menu_principal():
+def admin_menu():
     global ventana_principal
     ventana_principal = tk.Tk()
     ventana_principal.title("Menú Principal")
@@ -30,15 +30,15 @@ def menu_principal():
     label_admin = tk.Label(ventana_principal, text="Menú de Administrador", font=('Arial', 24))
     label_admin.pack(pady=20)
 
-    # Button "Proyectos"
+    # Botón Proyectos
     btn_proyectos = tk.Button(ventana_principal, text="Proyectos", font=('Arial', 18), command=admin_menu_proyectos)
     btn_proyectos.pack(pady=20)
 
-    # Button "Button 2"
+    # Botón Empleados
     btn_2 = tk.Button(ventana_principal, text="Empleados", font=('Arial', 18), command=admin_menu_empleados)
     btn_2.pack(pady=20)
 
-    # Button "Button 3"
+    # Botón 3
     btn_3 = tk.Button(ventana_principal, text="Button 3", font=('Arial', 18))
     btn_3.pack(pady=20)
 
@@ -69,7 +69,7 @@ def admin_menu_proyectos():
     # Button for returning to the previous window
     def return_to_main():
         ventana_proyectos.destroy()
-        menu_principal()
+        admin_menu()
 
     btn_return = tk.Button(ventana_proyectos, text="Regresar", font=('Arial', 18), command=return_to_main)
     btn_return.pack(pady=20, anchor='e', padx=20)
@@ -77,13 +77,15 @@ def admin_menu_proyectos():
     ventana_proyectos.mainloop()
 
 def admin_menu_empleados():
+    global ventana_empleados
     ventana_principal.destroy()
     
     ventana_empleados = tk.Tk()
-    ventana_empleados.title("Manejo de Empleados")
+    ventana_empleados.title("Listado de Empleados")
     ventana_empleados.geometry("1280x700")
 
     tabla = ttk.Treeview(ventana_empleados, columns=("Columna1", "Columna2", "Columna3", "Columna4"))
+    tabla.column("#0", width=0, stretch=tk.NO)
     tabla.heading("#1", text="No.")
     tabla.heading("#2", text="Codigo Empleado")
     tabla.heading("#3", text="Nombre")
@@ -104,13 +106,15 @@ def admin_menu_empleados():
         if ruta_archivo:
             tabla.delete(*tabla.get_children()) 
 
-            with open(ruta_archivo, newline="\n") as archivo_csv:
-                lector_csv = csv.reader(archivo_csv)
+            with open(ruta_archivo, newline="\n", encoding="utf-8") as archivo_csv:
+                lector_csv = csv.reader(archivo_csv, delimiter=",")
                 next(lector_csv) 
 
                 for fila in lector_csv:
-                    id,nombre,password,puesto = fila #[FDEV-101,Cristian Suy,cris123,Frontend Developer]
-                    tablaGlobal.Insertar(id,nombre,password,puesto)
+                    print(fila)
+                    
+                    codigo,nombre,password,puesto = fila
+                    tablaGlobal.Insertar(codigo,nombre,password,puesto)
             AgregarTabla()
 
     boton_leer_csv = tk.Button(ventana_empleados, text="Leer CSV", command=leer_csv)
@@ -120,7 +124,7 @@ def admin_menu_empleados():
     
     def cerrar_sesion():
         ventana_empleados.destroy()
-        abrir_ventana_login()
+        admin_menu()
 
     boton_cerrar_sesion = tk.Button(ventana_empleados, text="Cerrar Sesión", command=cerrar_sesion)
     boton_cerrar_sesion.pack(pady=20)
@@ -130,7 +134,7 @@ def admin_menu_empleados():
 def abrir_ventana_login():
     global ventana_login, entry_usuario, entry_contrasena
     ventana_login = tk.Tk()
-    ventana_login.title("ProjectUp")
+    ventana_login.title("ProjectUp - 202111849")
     ventana_login.geometry("400x450") 
     imagen = tk.PhotoImage(file="unnamed.png")
 

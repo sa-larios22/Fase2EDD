@@ -24,8 +24,8 @@ class TablaHash():
                     self.tabla[indice] = nuevo
                     self.utilizacion += 1
                     self.capacidadTabla()
-            except:
-                print("Error")
+            except Exception as e:
+                print("Error: " + str(e))
 
     def calculoIndice(self, codigo):
         total = 0
@@ -36,7 +36,7 @@ class TablaHash():
         return indice
     
     def capacidadTabla(self):
-        capacidadActual = self.capacidad*0.75 # 8 * 0.75 = 6 {0,1,2,3,4..,6}
+        capacidadActual = self.capacidad*0.70 # 8 * 0.75 = 6 {0,1,2,3,4..,6}
         if self.utilizacion > capacidadActual: # 0 > 5
             self.capacidad = self.nuevaCapacidad()
             self.utilizacion = 0
@@ -60,16 +60,12 @@ class TablaHash():
 
     def reCalculoIndice(self, codigo, intento):
         nuevoIndice = self.calculoIndice(codigo) + (intento*intento) #2 + (2*2) = 6
-        return self.nuevoIndice(nuevoIndice)
+        return nuevoIndice % self.capacidad
     
     def nuevoIndice(self, nuevoIndice):
-        nuevaPosicion = 0
-        if nuevoIndice < self.capacidad:
-            nuevaPosicion = nuevoIndice
-        else:
-            nuevaPosicion = nuevoIndice - self.capacidad
-            nuevaPosicion = self.nuevoIndice(nuevaPosicion)
-        return nuevaPosicion
+        while nuevoIndice >= self.capacidad:
+            nuevoIndice -= self.capacidad
+        return nuevoIndice
     
     def buscar(self, codigo, password):
         indice = self.calculoIndice(codigo)
