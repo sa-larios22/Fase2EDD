@@ -1,0 +1,6 @@
+digraph arbol {"PY-101" ;
+x1 [label="",width=.1,style=invis];
+"PY-101" -> "PY-100" ;
+ "PY-101" -> "PY-102" ;
+{rank=same"PY-100" -> "PY-102" [style=invis]; } 
+}

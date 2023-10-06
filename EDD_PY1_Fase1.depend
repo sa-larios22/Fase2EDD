@@ -1,0 +1,104 @@
+# depslib dependency file v1.0
+1693416118 source:c:\users\andre\downloads\edd_py1_fase1\main.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	"ListaDEC.h"
+	"ListaDE.h"
+	"ColaPrioridad.h"
+	"Matriz.h"
+
+1693330395 source:c:\users\andre\downloads\edd_py1_fase1\include\empleado.cpp
+	"Empleado.h"
+	<string>
+
+1693330341 c:\users\andre\downloads\edd_py1_fase1\include\empleado.h
+	<string>
+
+1693283292 source:c:\users\andre\downloads\edd_py1_fase1\include\nodolistadec.cpp
+	"NodoListaDEC.h"
+
+1693331808 c:\users\andre\downloads\edd_py1_fase1\include\nodolistadec.h
+	"Empleado.h"
+
+1693417650 source:c:\users\andre\downloads\edd_py1_fase1\include\listadec.cpp
+	"ListaDEC.h"
+	<string>
+	<limits>
+
+1693284131 c:\users\andre\downloads\edd_py1_fase1\include\listadec.h
+	"NodoListaDEC.h"
+	<string>
+	<iostream>
+	<fstream>
+	<string.h>
+	<cstring>
+	<sstream>
+	<stdlib.h>
+
+1693330442 source:c:\users\andre\downloads\edd_py1_fase1\include\tarea.cpp
+	"Tarea.h"
+
+1693330373 c:\users\andre\downloads\edd_py1_fase1\include\tarea.h
+	<string>
+
+1693332233 source:c:\users\andre\downloads\edd_py1_fase1\include\nodolistade.cpp
+	"NodoListaDE.h"
+
+1693340952 c:\users\andre\downloads\edd_py1_fase1\include\nodolistade.h
+	"Tarea.h"
+
+1693349241 source:c:\users\andre\downloads\edd_py1_fase1\include\listade.cpp
+	"ListaDE.h"
+	<string>
+	<iostream>
+
+1693343964 c:\users\andre\downloads\edd_py1_fase1\include\listade.h
+	"NodoListaDE.h"
+	<string>
+
+1693415891 source:c:\users\andre\downloads\edd_py1_fase1\include\colaprioridad.cpp
+	"ColaPrioridad.h"
+
+1693352959 c:\users\andre\downloads\edd_py1_fase1\include\colaprioridad.h
+	"NodoCola.h"
+	"Proyecto.h"
+	<string>
+	<iostream>
+
+1693352761 c:\users\andre\downloads\edd_py1_fase1\include\nodocola.h
+	"Proyecto.h"
+
+1693371770 c:\users\andre\downloads\edd_py1_fase1\include\proyecto.h
+	<string>
+
+1693352850 source:c:\users\andre\downloads\edd_py1_fase1\include\nodocola.cpp
+	"NodoCola.h"
+
+1693352682 source:c:\users\andre\downloads\edd_py1_fase1\include\proyecto.cpp
+	"Proyecto.h"
+
+1693371851 source:c:\users\andre\downloads\edd_py1_fase1\include\nodomatriz.cpp
+	"NodoMatriz.h"
+
+1693374930 c:\users\andre\downloads\edd_py1_fase1\include\nodomatriz.h
+	<string>
+	"Proyecto.h"
+	"Empleado.h"
+	"ListaDE.h"
+
+1693375078 source:c:\users\andre\downloads\edd_py1_fase1\include\matriz.cpp
+	"Matriz.h"
+
+1693375016 c:\users\andre\downloads\edd_py1_fase1\include\matriz.h
+	<fstream>
+	<iostream>
+	<string>
+	<string.h>
+	"NodoMatriz.h"
+	"NodoListaDEC.h"
+	"ColaPrioridad.h"
+	"Proyecto.h"
+	"Empleado.h"
+	"ListaDEC.h"
+
