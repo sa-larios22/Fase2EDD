@@ -1,4 +1,4 @@
-from nodoB import NodoB
+from .nodoB import NodoB
 
 class RamaB():
     def __init__(self):

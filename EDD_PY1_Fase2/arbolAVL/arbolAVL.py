@@ -42,25 +42,25 @@ class Arbol_AVL():
         if raiz is None:
             return Nodo_AVL(valor)
         else:
-            if raiz.valor == valor:
+            if str(raiz.valor.id) == str(valor.id):
                 raiz.valor = valor
-            elif raiz.valor > valor:
+            elif str(raiz.valor.id) > str(valor.id):
                 raiz.izquierdo = self.InsertarNodo(valor, raiz.izquierdo)
-            elif raiz.valor < valor:
+            elif str(raiz.valor.id) < str(valor.id):
                 raiz.derecho = self.InsertarNodo(valor, raiz.derecho)
         #Luego de insercion, procedemos a realizar rotaciones
         raiz.altura = 1 + max(self.Altura(raiz.izquierdo),self.Altura(raiz.derecho))
         balanceo = self.Equilibrio(raiz)
         raiz.factor_equilibrio = balanceo
 
-        if balanceo > 1 and valor > raiz.derecho.valor:#Rotacion Simple a la Izquierda
+        if balanceo > 1 and str(valor.id) > str(raiz.derecho.valor):#Rotacion Simple a la Izquierda
             return self.RotacionI(raiz)
-        if balanceo < -1 and valor < raiz.izquierdo.valor:#Rotacion Simple a la Derecha
+        if balanceo < -1 and str(valor.id) < str(raiz.izquierdo.valor):#Rotacion Simple a la Derecha
             return self.RotacionD(raiz)
-        if balanceo > 1 and valor < raiz.derecho.valor:#Rotacion Doble a la Izquierda
+        if balanceo > 1 and str(valor.id) < str(raiz.derecho.valor):#Rotacion Doble a la Izquierda
             raiz.derecho = self.RotacionD(raiz.derecho)
             return self.RotacionI(raiz)
-        if balanceo < -1 and valor > raiz.izquierdo.valor:#Rotacion Doble a la Derecha
+        if balanceo < -1 and str(valor.id) > str(raiz.izquierdo.valor):#Rotacion Doble a la Derecha
             raiz.izquierdo = self.RotacionI(raiz.izquierdo)
             return self.RotacionD(raiz)
         return raiz
@@ -98,6 +98,7 @@ class Arbol_AVL():
         a = open("arbolAVL.dot","w")
         if self.raiz is not None:
             cadena += "digraph arbol {"
+            cadena += "node[shape=note];"
             cadena += self.retornarValoresArbol(self.raiz, 0)
             cadena += "}"
         a.write(cadena)
@@ -109,18 +110,18 @@ class Arbol_AVL():
         numero = id + 1
         if raiz is not None:
             cadena += "\""
-            cadena += str(raiz.valor)
+            cadena += "{}\\nNombre: {}\\nPrioridad: {} ".format(raiz.valor.id, raiz.valor.nombre, raiz.valor.prioridad )
             cadena += "\" ;\n"
             if(raiz.izquierdo is not None and raiz.derecho is not None):
                 cadena += "x{} [label=\"\",width=.1,style=invis];\n".format(numero)
-                cadena += "\"{}\" -> {} \"{}\" -> {}".format(raiz.valor, self.retornarValoresArbol(raiz.izquierdo, numero), raiz.valor, self.retornarValoresArbol(raiz.derecho, numero))
-                cadena += "{" + "rank=same" + "\"{}\" -> \"{}\" [style=invis]; ".format(raiz.izquierdo.valor, raiz.derecho.valor) + "} \n"
+                cadena += "\"{}\\nNombre: {}\\nPrioridad: {} \" -> {} \"{}\\nNombre: {}\\nPrioridad: {} \" -> {}".format(raiz.valor.id, raiz.valor.nombre, raiz.valor.prioridad, self.retornarValoresArbol(raiz.izquierdo, numero), raiz.valor.id, raiz.valor.nombre, raiz.valor.prioridad , self.retornarValoresArbol(raiz.derecho, numero))
+                cadena += "{" + "rank=same" + "\"{}\\nNombre: {}\\nPrioridad: {} \" -> \"{}\\nNombre: {}\\nPrioridad: {} \" [style=invis]; ".format(raiz.izquierdo.valor.id, raiz.izquierdo.valor.nombre, raiz.izquierdo.valor.prioridad, raiz.derecho.valor.id, raiz.derecho.valor.nombre, raiz.derecho.valor.prioridad) + "} \n"
             elif(raiz.izquierdo is not None and raiz.derecho is None):
                 cadena += "x{} [label=\"\",width=.1,style=invis];\n".format(numero)
-                cadena += "\"{}\" -> {} \"{}\" -> x{}[style=invis];\n".format(raiz.valor, self.retornarValoresArbol(raiz.izquierdo, numero), raiz.valor, numero)
-                cadena += "{" + "rank=same " + "\"{}\" -> x{} [style=invis]; ".format(raiz.izquierdo.valor, numero) + "} \n"
+                cadena += "\"{}\" -> {} \"{}\" -> x{}[style=invis];\n".format(str(raiz.valor.id), self.retornarValoresArbol(raiz.izquierdo, numero), str(raiz.valor.id), numero)
+                cadena += "{" + "rank=same " + "\"{}\" -> x{} [style=invis]; ".format(raiz.izquierdo.valor.id, numero) + "} \n"
             elif(raiz.izquierdo is None and raiz.derecho is not None):
                 cadena += "x{} [label=\"\",width=.1,style=invis];\n".format(numero)
-                cadena += "\"{}\" -> x{}[style=invis]; \n \"{}\" -> {}".format(raiz.valor, numero, raiz.valor, self.retornarValoresArbol(raiz.derecho, numero))
-                cadena += "{" + "rank=same " + "x{} -> \"{}\" [style=invis]; ".format(numero, raiz.derecho.valor) + "} \n"
+                cadena += "\"{}\" -> x{}[style=invis]; \n \"{}\" -> {}".format(str(raiz.valor.id), numero, str(raiz.valor.id), self.retornarValoresArbol(raiz.derecho, numero))
+                cadena += "{" + "rank=same " + "x{} -> \"{}\" [style=invis]; ".format(numero, raiz.derecho.valor.id) + "} \n"
         return cadena

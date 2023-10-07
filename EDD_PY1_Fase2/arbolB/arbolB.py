@@ -1,5 +1,5 @@
-from nodoB import NodoB
-from ramaB import RamaB
+from .nodoB import NodoB
+from .ramaB import RamaB
 import os
 
 class ArbolB():
@@ -8,7 +8,7 @@ class ArbolB():
         self.raiz: RamaB = None
 
     def insertar(self, valor):
-        numero = self.suma_ascii(valor)
+        numero = self.suma_ascii(valor.codigo)
         nuevo = NodoB(numero, valor)
         if self.raiz is None:
             self.raiz = RamaB()
@@ -100,13 +100,15 @@ class ArbolB():
     def graficar(self):
         cadena = ''
         archivo = "arbolB.jpg"
-        a = open("arbolB.dot","w")
-        if self.raiz is not None:
-            cadena += "digraph arbol { \nnode[shape=record]"
-            cadena += self.Grafo(self.raiz.primero)
-            cadena += self.conexionRamas(self.raiz.primero)
-            cadena += "}"
-        a.write(cadena)
+        with open("arbolB.dot","w", encoding="utf-8") as a:
+            if self.raiz is not None:
+                cadena += "digraph arbol { \nnode[shape=record]"
+                cadena += self.Grafo(self.raiz.primero)
+                cadena += self.conexionRamas(self.raiz.primero)
+                cadena += "}"
+                a.write(cadena)
+            else:
+                print("No hay datos para graficar")
         a.close()
         os.system("dot -Tjpg arbolB.dot -o " + archivo)
     
@@ -128,16 +130,16 @@ class ArbolB():
         dot = ''
         if rama is not None:
             aux:NodoB = rama
-            dot = dot + "R" + str(rama.valor) + "[label=\"" #rama.valor.Tarea.codigo_tarea || rama.valor.codigo_tarea
+            dot = dot + "R" + str(rama.valor)  + "[label=\"" #rama.valor.Tarea.codigo_tarea || rama.valor.codigo_tarea
             r = 1 
             while aux is not None:
                 if aux.izquierda is not None:
                     dot = dot + "<C" + str(r) + ">|"
                     r += 1
                 if aux.siguiente is not None:
-                    dot = dot + str(aux.id) + "|" #Cambio de valores
+                    dot = dot + str(aux.id.codigo) + "\\n" + str(aux.id.empleado) + "\\n" + str(aux.id.nombre) + "|" #Cambio de valores
                 else:
-                    dot = dot + str(aux.id) #cambio de Valores
+                    dot = dot + str(aux.id.codigo) + "\\n" + str(aux.id.empleado) + "\\n" + str(aux.id.nombre) #cambio de Valores
                     if aux.derecha is not None:
                         dot = dot + "|<C" + str(r) + ">"
                 aux = aux.siguiente
@@ -162,15 +164,3 @@ class ArbolB():
                         dot += self.conexionRamas(aux.derecha.primero)
                 aux = aux.siguiente
         return dot
-    
-arbol = ArbolB()
-arbol.insertar('T1-PY-100')
-arbol.insertar('T2-PY-100')
-arbol.insertar('T3-PY-100')
-arbol.insertar('T4-PY-100')
-arbol.insertar('T1-PY-101')
-arbol.insertar('T1-PY-102')
-arbol.insertar('T1-PY-103')
-arbol.insertar('T2-PY-103')
-arbol.insertar('T2-PY-104')
-arbol.graficar()

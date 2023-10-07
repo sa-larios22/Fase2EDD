@@ -1,18 +1,18 @@
-digraph arbol {"PY-103" ;
+digraph arbol {node[shape=note];"PY-103\nNombre: Pizzeria Los Hermanos\nPrioridad: A " ;
 x1 [label="",width=.1,style=invis];
-"PY-103" -> "PY-101" ;
+"PY-103\nNombre: Pizzeria Los Hermanos\nPrioridad: A " -> "PY-101\nNombre: Tienda Online Restaurante Giovanni\nPrioridad: B " ;
 x2 [label="",width=.1,style=invis];
-"PY-101" -> "PY-100" ;
- "PY-101" -> "PY-102" ;
-{rank=same"PY-100" -> "PY-102" [style=invis]; } 
- "PY-103" -> "PY-105" ;
+"PY-101\nNombre: Tienda Online Restaurante Giovanni\nPrioridad: B " -> "PY-100\nNombre: Sistema de inventario Vestidos Julieta\nPrioridad: C " ;
+ "PY-101\nNombre: Tienda Online Restaurante Giovanni\nPrioridad: B " -> "PY-102\nNombre: Sistema de inventario EPA\nPrioridad: A " ;
+{rank=same"PY-100\nNombre: Sistema de inventario Vestidos Julieta\nPrioridad: C " -> "PY-102\nNombre: Sistema de inventario EPA\nPrioridad: A " [style=invis]; } 
+ "PY-103\nNombre: Pizzeria Los Hermanos\nPrioridad: A " -> "PY-105\nNombre: Venta de Repuestos Gomez\nPrioridad: A " ;
 x2 [label="",width=.1,style=invis];
-"PY-105" -> "PY-104" ;
- "PY-105" -> "PY-107" ;
+"PY-105\nNombre: Venta de Repuestos Gomez\nPrioridad: A " -> "PY-104\nNombre: Servicio de Cable\nPrioridad: A " ;
+ "PY-105\nNombre: Venta de Repuestos Gomez\nPrioridad: A " -> "PY-107\nNombre: Fruta Organica Jessi\nPrioridad: C " ;
 x3 [label="",width=.1,style=invis];
-"PY-107" -> "PY-106" ;
- "PY-107" -> "PY-108" ;
-{rank=same"PY-106" -> "PY-108" [style=invis]; } 
-{rank=same"PY-104" -> "PY-107" [style=invis]; } 
-{rank=same"PY-101" -> "PY-105" [style=invis]; } 
+"PY-107\nNombre: Fruta Organica Jessi\nPrioridad: C " -> "PY-106\nNombre: Bufete Juridico MyM Asociados\nPrioridad: B " ;
+ "PY-107\nNombre: Fruta Organica Jessi\nPrioridad: C " -> "PY-108\nNombre: Pasteleria Queen's\nPrioridad: A " ;
+{rank=same"PY-106\nNombre: Bufete Juridico MyM Asociados\nPrioridad: B " -> "PY-108\nNombre: Pasteleria Queen's\nPrioridad: A " [style=invis]; } 
+{rank=same"PY-104\nNombre: Servicio de Cable\nPrioridad: A " -> "PY-107\nNombre: Fruta Organica Jessi\nPrioridad: C " [style=invis]; } 
+{rank=same"PY-101\nNombre: Tienda Online Restaurante Giovanni\nPrioridad: B " -> "PY-105\nNombre: Venta de Repuestos Gomez\nPrioridad: A " [style=invis]; } 
 }
