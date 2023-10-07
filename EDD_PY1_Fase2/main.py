@@ -4,19 +4,25 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import csv
 from tablaHash.tablaHash import TablaHash
+from arbolAVL.lectura import graficar_arbol
 
 tablaGlobal = TablaHash()
 
 def verificar_login():
+    global usuario, contrasena
+    
+    usuario = ""
+    contrasena = ""
+    
     usuario = entry_usuario.get()
     contrasena = entry_contrasena.get()
 
-    if usuario == "202111849" and contrasena == "admin" or usuario == "1" and contrasena == "1":
+    if usuario == "PM-202111849" and contrasena == "PM-202111849" or usuario == "1" and contrasena == "1":
         ventana_login.destroy() 
         admin_menu()  
     elif tablaGlobal.buscar(usuario, contrasena):
-        ventana_login.destroy()  
-        admin_menu_empleados()  
+        ventana_login.destroy()
+        admin_menu()  
     else:
         messagebox.showerror("Error de inicio de sesión", "Credenciales incorrectas")
 
@@ -24,7 +30,7 @@ def admin_menu():
     global ventana_principal
     ventana_principal = tk.Tk()
     ventana_principal.title("Menú Principal")
-    ventana_principal.geometry("1280x700")
+    ventana_principal.geometry("640x480")
     
     # Label "Menú de Administrador"
     label_admin = tk.Label(ventana_principal, text="Menú de Administrador", font=('Arial', 24))
@@ -39,7 +45,7 @@ def admin_menu():
     btn_2.pack(pady=20)
 
     # Botón 3
-    btn_3 = tk.Button(ventana_principal, text="Button 3", font=('Arial', 18))
+    btn_3 = tk.Button(ventana_principal, text="Cerrar Sesión", font=('Arial', 18), command = abrir_ventana_login)
     btn_3.pack(pady=20)
 
 def admin_menu_proyectos():
@@ -50,23 +56,23 @@ def admin_menu_proyectos():
     ventana_proyectos.title("Menú Proyectos")
     ventana_proyectos.geometry("1280x700")
 
-    # Button "Cargar JSON" centered to the left
+    # Botón "Cargar JSON"
     btn_cargar_json = tk.Button(ventana_proyectos, text="Cargar JSON", font=('Arial', 18), command=load_json)
     btn_cargar_json.pack(pady=20, anchor='w', padx=20)
 
-    # Textbox that adapts to the size of the window horizontally
+    # Caja de texto
     textbox = tk.Text(ventana_proyectos, height=30, wrap=tk.WORD)
     textbox.pack(pady=10, fill=tk.X, padx=20)
 
-    # Button "Button 1"
-    btn_1 = tk.Button(ventana_proyectos, text="Button 1", font=('Arial', 18))
+    # Botón "Reporte de Proyectos"
+    btn_1 = tk.Button(ventana_proyectos, text="Reporte Proyectos", font=('Arial', 18))
     btn_1.pack(pady=10, side=tk.LEFT, padx=10)
 
-    # Button "Button 2"
+    # Botón "Reporte de Tareas"
     btn_2 = tk.Button(ventana_proyectos, text="Button 2", font=('Arial', 18))
     btn_2.pack(pady=10, side=tk.LEFT, padx=10)
 
-    # Button for returning to the previous window
+    # Volver a la ventana anterior
     def return_to_main():
         ventana_proyectos.destroy()
         admin_menu()
@@ -132,6 +138,11 @@ def admin_menu_empleados():
     ventana_empleados.mainloop()
 
 def abrir_ventana_login():
+    try:
+        ventana_principal.destroy()
+    except:
+        pass
+    
     global ventana_login, entry_usuario, entry_contrasena
     ventana_login = tk.Tk()
     ventana_login.title("ProjectUp - 202111849")
@@ -168,5 +179,8 @@ def load_json():
         contenido = cargar_json(file_path)
         textbox.delete(1.0, tk.END)
         textbox.insert(tk.END, contenido)
+
+def reporte_proyectos():
+    graficar_arbol()
 
 abrir_ventana_login()

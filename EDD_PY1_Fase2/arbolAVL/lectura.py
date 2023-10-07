@@ -24,7 +24,8 @@ def cargar_json(file_path):
         
     for i in range(len(datos['Proyectos'])):
         arbol.Insertar(datos['Proyectos'][i]['id'])
-
-    arbol.graficar()
     
     return output
+
+def graficar_arbol():
+    arbol.graficar()

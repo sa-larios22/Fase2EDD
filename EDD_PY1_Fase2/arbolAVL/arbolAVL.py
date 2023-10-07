@@ -110,8 +110,6 @@ class Arbol_AVL():
         if raiz is not None:
             cadena += "\""
             cadena += str(raiz.valor)
-            print(cadena)
-            # cadena += "{}".format(raiz.valor) + "{}".format(raiz.)
             cadena += "\" ;\n"
             if(raiz.izquierdo is not None and raiz.derecho is not None):
                 cadena += "x{} [label=\"\",width=.1,style=invis];\n".format(numero)

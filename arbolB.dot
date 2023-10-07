@@ -1,0 +1,17 @@
+digraph arbol { 
+node[shape=record]R540[label="<C1>|T4-PY-100|<C2>"];
+R538[label="<C1>|T2-PY-100|<C2>"];
+R537[label="T1-PY-100"];
+R539[label="T3-PY-100"];
+R2539[label="<C1>|T1-PY-102|<C2>|T2-PY-103|<C3>"];
+R1538[label="T1-PY-101"];
+R3540[label="T1-PY-103"];
+R4542[label="T2-PY-104"];
+R540:C1 -> R538;
+R538:C1 -> R537;
+R538:C2 -> R539;
+R540:C2 -> R2539;
+R2539:C1 -> R1538;
+R2539:C2 -> R3540;
+R2539:C3 -> R4542;
+}
